@@ -3,37 +3,48 @@ package com.fullstackdemo.springbootdemo.domain;
 import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Project")
 public class Project {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
+	@Column(name="PROJECT_NAME")
 	private String projectName;
+	@Column(name="PROJECT_IDENTIFIER")
 	private String projectIdentifier;
+	@Column(name="PROJECT_DESCRIPTION")
 	private String projectDescription;
+	@Column(name="START_DATE")
 	private LocalDate startDate;
+	@Column(name="END_DATE")
 	private LocalDate endDate;
+	@Column(name="CREATED_AT")
 	private LocalDate createdAt;
+	@Column(name="UPDATED_AT")
 	private LocalDate updatedAt;
-	
+
 	@PrePersist
 	protected void onCreate() {
 		createdAt = LocalDate.now();
 	}
-	
+
 	@PreUpdate
 	protected void onUpdate() {
 		updatedAt = LocalDate.now();
 	}	
-	
+
 	public Project() {
 	}
 
@@ -100,6 +111,6 @@ public class Project {
 	public void setUpdatedAt(LocalDate updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
+
+
 }
