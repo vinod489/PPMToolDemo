@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fullstackdemo.springbootdemo.domain.Project;
+import com.fullstackdemo.springbootdemo.exceptions.ProjectIDException;
 import com.fullstackdemo.springbootdemo.repositories.ProjectRepository;
 
 @Service
@@ -14,6 +15,10 @@ public class ProjectService {
 	
 	public Project saveOrUpdateProject(Project project) {
 		//logic - validations..etc..
-		return projectRepository.save(project);
+		try {
+			return projectRepository.save(project);
+		} catch(Exception e) {
+			throw new ProjectIDException("Unable to save project with project Id '"+project.getProjectIdentifier().toUpperCase()+"' due to "+e.getMessage());
+		}
 	}
 }
