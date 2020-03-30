@@ -1,8 +1,6 @@
 package com.fullstackdemo.springbootdemo.domain;
 
-import java.time.LocalDate;
-import java.util.Date;
-
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,38 +9,57 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
-@Table(name = "Project")
+@Table(name = "Project", schema = "PPMTool")
 public class Project {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	@Column(name="PROJECT_NAME")
+	
+	@Column(name="PROJECT_NAME", nullable = false)
+	@NotBlank(message = "Project name is required")
 	private String projectName;
-	@Column(name="PROJECT_IDENTIFIER")
+	
+	@Column(name="PROJECT_IDENTIFIER", nullable = false, unique = true)
+	@NotBlank(message = "Project identifier is required")
+	@Size(max = 5, min = 4, message = "Characters should be more than 4 and less than 5")
 	private String projectIdentifier;
+	
 	@Column(name="PROJECT_DESCRIPTION")
+	@NotBlank(message = "Project description is required")
 	private String projectDescription;
+	
 	@Column(name="START_DATE")
-	private LocalDate startDate;
+	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	private LocalDateTime startDate;
+	
 	@Column(name="END_DATE")
-	private LocalDate endDate;
+	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	private LocalDateTime endDate;
+	
 	@Column(name="CREATED_AT")
-	private LocalDate createdAt;
+	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	private LocalDateTime createdAt;
+	
 	@Column(name="UPDATED_AT")
-	private LocalDate updatedAt;
+	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	private LocalDateTime updatedAt;
 
 	@PrePersist
 	protected void onCreate() {
-		createdAt = LocalDate.now();
+		createdAt = LocalDateTime.now();
 	}
 
 	@PreUpdate
 	protected void onUpdate() {
-		updatedAt = LocalDate.now();
+		updatedAt = LocalDateTime.now();
 	}	
 
 	public Project() {
@@ -80,35 +97,35 @@ public class Project {
 		this.projectDescription = projectDescription;
 	}
 
-	public LocalDate getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 
-	public LocalDate getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(LocalDate createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
-	public LocalDate getUpdatedAt() {
+	public LocalDateTime getUpdatedAt() {
 		return updatedAt;
 	}
 
-	public void setUpdatedAt(LocalDate updatedAt) {
+	public void setUpdatedAt(LocalDateTime updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 

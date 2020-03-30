@@ -18,9 +18,9 @@ public class ProjectController {
 	@Autowired
 	private ProjectService projectService;
 	
-	@PostMapping("/saveproject")
+	@PostMapping("/")
 	public ResponseEntity<Project> saveProject(@RequestBody Project project) {
 		Project savedProject = projectService.saveOrUpdateProject(project);
-		return new ResponseEntity<Project>(HttpStatus.CREATED);
+		return new ResponseEntity<Project>(savedProject, HttpStatus.CREATED);
 	}	
 }
