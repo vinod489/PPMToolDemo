@@ -21,4 +21,13 @@ public class ProjectService {
 			throw new ProjectIDException("Unable to save project with project Id '"+project.getProjectIdentifier().toUpperCase()+"' due to "+e.getMessage());
 		}
 	}
+	
+	public Project findProjectByIdentifier(String projectId) {
+		Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+		if(project == null) {
+			throw new ProjectIDException("Project ID '"+projectId+"' does not exist");
+		}
+		return project;
+		
+	}
 }

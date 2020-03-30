@@ -7,5 +7,5 @@ import com.fullstackdemo.springbootdemo.domain.Project;
 
 @Repository
 public interface ProjectRepository extends CrudRepository<Project, Long>{
-	Iterable<Project> findAllById(Long Id);
+	Project findByProjectIdentifier(String projectIdentifier);
 }
