@@ -12,6 +12,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -37,19 +40,21 @@ public class Project {
 	private String projectDescription;
 	
 	@Column(name="START_DATE")
-	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime startDate;
 	
 	@Column(name="END_DATE")
-	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	@DateTimeFormat(iso = ISO.DATE_TIME, pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime endDate;
 	
 	@Column(name="CREATED_AT")
-	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdAt;
 	
 	@Column(name="UPDATED_AT")
-	@JsonFormat(pattern="yyyy-mm-dd hh:MM:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime updatedAt;
 
 	@PrePersist
