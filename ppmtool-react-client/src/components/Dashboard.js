@@ -1,8 +1,16 @@
 import React, { Component } from "react";
+import ProjectItem from "./ProjectItem";
 
 class Dashboard extends Component {
   render() {
-    return <h1>Welcome to the Dashboard</h1>;
+    return (
+      <div>
+        <h1>Welcome to Dashboard</h1>
+        <ProjectItem />
+        <ProjectItem />
+        <ProjectItem />
+      </div>
+    );
   }
 }
 

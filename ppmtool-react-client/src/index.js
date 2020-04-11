@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import Dashboard from "./components/Dashboard";
+import Header from "./components/Layout/Header";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Dashboard />
-    <Dashboard />
+    <Header />
     <Dashboard />
   </React.StrictMode>,
   document.getElementById("root")
